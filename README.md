@@ -1,6 +1,10 @@
 # ChatWizard
 Discord bot to encourage positiveness within a server by analyzing and scoring each member's behavior.
 
+
+![](https://img.shields.io/github/license/ulasonat/prime-video-plus?color=blue&label=License)
+
+## Overview
 The bot will assess members based on factors such as helpfulness and language use to encourage and reward positive contributions. Whether you're looking to improve the overall tone of your server or simply incentivize positive behavior, ChatWizard can help create a more welcoming and supportive environment for everyone!
 
 ## How will it work?
@@ -8,5 +12,3 @@ Our bot will leverage the OpenAI API to analyze members' text and assign them sc
 
 ## Which technologies?
 The main programming language for the project is Python, while the main APIs will be the OpenAI and Discord.
-
-<img src="https://img.shields.io/github/license/ulasonat/prime-video-plus?color=blue&label=License"/>
