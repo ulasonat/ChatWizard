@@ -1,5 +1,12 @@
 import discord
 import os
+import openai
+
+open_ai_api_key = os.getenv('OPENAI_KEY')
+discord_api_key = os.getenv('DISCORD_KEY')
+
+
+openai.api_key = open_ai_api_key
 
 log_file_path = '../log/log.txt'
 
@@ -19,6 +26,16 @@ def update_log_file(nickname, content):
         with open(log_file_path, 'a') as log_file:
             log_file.write(f'{nickname}: {content}\n')
 
+def get_openai_response(content):
+    # The code below returns a response using OpenAI based on the message.content that will be passed
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=content,
+        max_tokens=50,
+    )
+
+    return response
+
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
@@ -31,5 +48,7 @@ async def on_message(message):
     print(f'{message.author}: {message.content}')
     update_log_file(message.author, message.content)
 
+    response = get_openai_response(message.content) # feeding in the user input
+    print(response) # printing the response by OpenAI
 
-client.run(os.getenv('TOKEN'))
+client.run(discord_api_key)
