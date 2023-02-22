@@ -34,8 +34,19 @@ class DiscordBot(discord.Client):
         print(f'{message.author}: {message.content}')
         self.update_log_file(message.author, message.content)
 
-        response = self.openai_handler.get_response(message.content)
-        print(response)
+        response = self.openai_handler.get_response(message.content) # for testing only, will be deleted
+        print(response) # for testing only, will be deleted
+
+        scores = self.openai_handler.get_message_score(message.content)
+        user_id = str(message.author.id)
+
+        if user_id not in self.user_scores:
+            print(user_id, ' ', type(user_id))
+            self.user_scores[user_id] = self.openai_handler.generate_default_scores()
+            
+        self.user_scores[user_id]['grammar'] += scores['grammar']
+        self.save_user_scores()
+        
 
     def load_user_scores(self):
         """

@@ -19,3 +19,20 @@ class OpenAIHandler:
             max_tokens=50,
         )
         return response
+
+    def generate_default_scores(self):
+        """
+        Generates default scores for each category.
+        """
+        return {
+            'grammar': 100
+        }
+
+    def get_message_score(self, content):
+        """
+        Processes the text and generates various scores on different categories.
+        """
+
+        return {
+            'grammar': 1
+        } # PLACEHOLDER RETURN VALUE
