@@ -19,5 +19,3 @@ class OpenAIHandler:
             max_tokens=50,
         )
         return response
-    
-    
