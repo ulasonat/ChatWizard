@@ -1,9 +1,10 @@
 import discord
 import os
+import json
 
 class DiscordBot(discord.Client):
 
-    def __init__(self, intents, openai_handler, log_file_path):
+    def __init__(self, intents, openai_handler, log_file_path, user_scores_path):
         """
         Initializes a new instance of the DiscordBot class.
         """
@@ -11,6 +12,8 @@ class DiscordBot(discord.Client):
         super().__init__(intents=intents)
         self.openai_handler = openai_handler
         self.log_file_path = log_file_path
+        self.user_scores_path = user_scores_path
+        self.user_scores = self.load_user_scores()
 
     async def on_ready(self):
         """
@@ -33,6 +36,24 @@ class DiscordBot(discord.Client):
 
         response = self.openai_handler.get_response(message.content)
         print(response)
+
+    def load_user_scores(self):
+        """
+        Loads the user scores from the JSON file.
+        Returns a dictionary that maps user IDs to their scores.
+        """
+        if not os.path.exists(self.user_scores_path):
+            return {}
+
+        with open(self.user_scores_path, 'r') as file:
+            return json.load(file)
+
+    def save_user_scores(self):
+        """
+        Saves the user scores to the JSON file.
+        """
+        with open(self.user_scores_path, 'w') as file:
+            json.dump(self.user_scores, file)
 
     def update_log_file(self, nickname, content):
         """
