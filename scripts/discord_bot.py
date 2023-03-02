@@ -64,6 +64,12 @@ class DiscordBot(discord.Client):
             print(user_id, ' ', type(user_id))
             self.user_scores[user_id] = self.openai_handler.generate_default_scores()
 
+        self.save_updated_scores(user_id, scores)
+
+    def save_updated_scores(self, user_id, scores):
+        """
+        Saves the updated scores
+        """
         self.user_scores[user_id]['grammar'] += scores['grammar']
         self.save_user_scores()
 
