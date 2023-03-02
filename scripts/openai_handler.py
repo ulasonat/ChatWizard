@@ -1,11 +1,13 @@
 import openai
+import re
 
 class OpenAIHandler:
-    def __init__(self, api_key):
+    def __init__(self, api_key, grammar_prompt_path):
         """
         Initializes a new instance of the OpenAIHandler class.
         """
         self.api_key = api_key
+        self.grammar_prompt_path = grammar_prompt_path
         openai.api_key = api_key
 
     def get_response(self, content):
@@ -19,3 +21,49 @@ class OpenAIHandler:
             max_tokens=50,
         )
         return response
+
+    def generate_default_scores(self):
+        """
+        Generates default scores for each category.
+        """
+        return {
+            'grammar': 100
+        }
+
+    def get_message_score(self, content):
+        """
+        Processes the text and generates various scores on different categories.
+        """
+
+        return {
+            'grammar': self.get_grammar_score(content)
+        }
+
+    def get_grammar_score(self, content):
+
+        with open(self.grammar_prompt_path, 'r') as file:
+            prompt = file.read()
+
+        prompt += content
+
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": prompt},
+            ]
+        )
+
+        grammar_score = response.choices[0]['message']['content']
+
+        try:
+            grammar_score = int(grammar_score)
+            grammar_score = ((grammar_score / 5) - 1) * 10
+
+            if grammar_score < -10 or grammar_score > 10:
+                return -1001
+
+        except Exception as exception:
+            print(exception)
+            return -1001
+
+        return grammar_score
