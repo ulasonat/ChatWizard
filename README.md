@@ -5,8 +5,35 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 ![](https://img.shields.io/github/license/ulasonat/prime-video-plus?color=blue&label=License)
 ![](https://img.shields.io/github/issues/ulasonat/ChatWizard)
 
-## How to execute
+
+**TEST COVERAGE (HW4)**
+| Filename      | Coverage |
+| ----------- | ----------- |
+| *discord_bot.py*       | 68%       |
+| *openai_handler.py*   | 89%        |
+| **TOTAL COVERAGE**  | 80.4%        |
+
+
+## Prerequisites 
+
+To execute the program, you will need to have:
+- Python 3 installed
+- An OpenAI API key
+- A Discord API key
+- The following packages imported:
+  - `discord`
+  - `openai`
+  - `faker`
+  - `coverage`
+
+
+To execute the Discord bot:
 <code>python3 main.py</code>
+
+To test the code:
+<code>python3 unit_tests.py</code>
+
+
 
 ## Overview
 The bot will assess members based on factors such as helpfulness and language use to encourage and reward positive contributions. Whether you're looking to improve the overall tone of your server or simply incentivize positive behavior, ChatWizard can help create a more welcoming and supportive environment for everyone!
