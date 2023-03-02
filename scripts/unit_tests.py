@@ -74,9 +74,7 @@ class TestDiscordBot(unittest.TestCase):
         with open(self.user_scores_path, 'r') as file:
             test_scores = json.load(file)
 
-        print(test_scores)
         self.assertNotEqual(test_scores, None)
-        print(test_scores[test_user_id]['grammar'], 50)
 
     def test_update_log_file(self):
         test_nickname = self.faker.name()
