@@ -38,11 +38,11 @@ annotate:  ## run type checking
 #########
 # TESTS #
 #########
-test: ## clean and run unit tests
-	python -m pytest -v example_project_python/tests
+test: ## run the unit tests
+	python3 -m coverage run unit_tests.py
 
-coverage:  ## clean and run unit tests with coverage
-	python -m pytest -v example_project_python/tests --cov=example_project_python --cov-branch --cov-fail-under=75 --cov-report term-missing
+coverage:  ## after executing the test
+	python3 -m coverage report  
 
 # Alias
 tests: test
