@@ -53,7 +53,6 @@ class DiscordBot(discord.Client):
         if message.author == self.user:
             return False
 
-        print(f'{message.author}: {message.content}')
         return True
 
     def update_scores(self, user_id):
@@ -61,9 +60,14 @@ class DiscordBot(discord.Client):
         Updates the scores of the given user ID with the scores from the most recent message they sent
         """
         if user_id not in self.user_scores:
-            print(user_id, ' ', type(user_id))
             self.user_scores[user_id] = self.openai_handler.generate_default_scores()
 
+        self.save_updated_scores(user_id, scores)
+
+    def save_updated_scores(self, user_id, scores):
+        """
+        Saves the updated scores
+        """
         self.user_scores[user_id]['grammar'] += scores['grammar']
         self.save_user_scores()
 

@@ -8,6 +8,7 @@ class OpenAIHandler:
         """
         self.api_key = api_key
         self.grammar_prompt_path = grammar_prompt_path
+
         openai.api_key = api_key
 
     def get_response(self, content):
@@ -15,12 +16,13 @@ class OpenAIHandler:
         Sends a prompt to the OpenAI API and returns the generated response.
         """
         # The code below returns a response using OpenAI based on the message.content that will be passed
-        response = openai.Completion.create(
-            engine='text-davinci-003',
-            prompt=content,
-            max_tokens=50,
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": content},
+            ]
         )
-        return response
+        return response.choices[0]['message']['content']
 
     def generate_default_scores(self):
         """
@@ -62,8 +64,7 @@ class OpenAIHandler:
             if grammar_score < -10 or grammar_score > 10:
                 return -1001
 
-        except Exception as exception:
-            print(exception)
+        except:  # means something went wrong while processing the text, I return the error code to ignore this calculation
             return -1001
 
         return grammar_score
