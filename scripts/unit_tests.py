@@ -2,6 +2,7 @@ import unittest
 import discord
 import json
 import os
+import coverage
 from faker import Faker
 from unittest.mock import Mock, patch, MagicMock
 from discord.ext import commands
@@ -152,4 +153,11 @@ class TestOpenAIHandler(unittest.TestCase):
 
 
 if __name__ == '__main__':
+
+    cov = coverage.Coverage()
+    cov.start()
+
     unittest.main()
+
+    cov.stop()
+    cov.report()
