@@ -46,20 +46,24 @@ class OpenAIHandler:
 
         prompt += content
 
-        grammar_score = openai.Completion.create(
-        engine='text-davinci-003',
-        prompt=prompt,
-        max_tokens=50,
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": prompt},
+            ]
         )
 
-        grammar_score = grammar_score.choices[0].text
+        grammar_score = response.choices[0]['message']['content']
+
         try:
             grammar_score = int(grammar_score)
             grammar_score = ((grammar_score / 5) - 1) * 10
 
             if grammar_score < -10 or grammar_score > 10:
                 return -1001
-        except:
-            return -1001 # Error code, will be handled. CURRENTLY GETS CALLED TOO FREQUENTLY
+
+        except Exception as exception:
+            print(exception)
+            return -1001
 
         return grammar_score
