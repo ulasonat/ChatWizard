@@ -28,17 +28,15 @@ class DiscordBot(discord.Client):
         A callback method that is called when the bot receives a message from a user.
         """
 
-        if message.author == self.user:
+        if not self.scan_message(message):
             return
 
         if message.content.startswith('!help'):
             await message.channel.send('Here, I will provide guidance on how to get the most out this bot.')
 
-        print(f'{message.author}: {message.content}')
         self.update_log_file(message.author, message.content)
 
         scores = self.openai_handler.get_message_score(message.content)
-
         for label, score in scores.items():
             if not score == -1001:
                 await message.channel.send(label.capitalize() + ' score: ' + str(score))
@@ -46,16 +44,28 @@ class DiscordBot(discord.Client):
                 scores[label] = 0
                 await message.channel.send('Something went wrong, your score remained the same.')
 
-        user_id = str(message.author.id)
+        self.update_scores(message.author.id)
 
+    def scan_message(self, message):
+        """
+        Returns `True` if the message was sent by a user, and `False` otherwise, and prints the message
+        """
+        if message.author == self.user:
+            return False
+
+        print(f'{message.author}: {message.content}')
+        return True
+
+    def update_scores(self, user_id):
+        """
+        Updates the scores of the given user ID with the scores from the most recent message they sent
+        """
         if user_id not in self.user_scores:
             print(user_id, ' ', type(user_id))
             self.user_scores[user_id] = self.openai_handler.generate_default_scores()
 
-
         self.user_scores[user_id]['grammar'] += scores['grammar']
         self.save_user_scores()
-        
 
     def load_user_scores(self):
         """
