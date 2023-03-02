@@ -6,6 +6,7 @@ from faker import Faker
 from unittest.mock import Mock, patch, MagicMock
 from discord.ext import commands
 from discord_bot import DiscordBot
+from openai_handler import OpenAIHandler
 
 class TestDiscordBot(unittest.TestCase):
 
@@ -92,6 +93,62 @@ class TestDiscordBot(unittest.TestCase):
 
         self.assertNotEqual(log_contents, None)
         self.assertIn(test_nickname + ": " + test_content, log_contents)
+
+class TestOpenAIHandler(unittest.TestCase):
+    def setUp(self):
+        open_ai_api_key = os.getenv('OPENAI_KEY')
+        grammar_prompt_path = '../prompts/grammar.txt'
+        self.handler = OpenAIHandler(api_key=open_ai_api_key, grammar_prompt_path=grammar_prompt_path)
+
+    def test_generate_default_scores(self):
+        test_data = self.handler.generate_default_scores()
+        self.assertEqual(test_data, {'grammar': 100})
+
+    def test_get_grammar_score_valid(self):
+        content = "Hello, how are you doing today?"
+
+        # Since OpenAI API is not entirely reliable, but I want to make sure that I'll get the result I want mostly,
+        # I will take the average of 10 results for the grammar score here.
+        total_expected_score = 0
+        for i in range(10):
+            total_expected_score += self.handler.get_grammar_score(content)
+        total_expected_score /= 10
+
+        minimum_expected_score = 9  # As this sentence is correct, it shouldnt be worse than 9 no matter what
+        self.assertGreater(total_expected_score, minimum_expected_score)
+
+
+    def test_get_grammar_score_invalid(self):
+        content = "I is going out"
+
+        total_expected_score = 0
+        divide_by = 0
+
+        for i in range(10):
+            score = self.handler.get_grammar_score(content)
+            if score != 1001:  # if we don't receive the error code
+                total_expected_score += score
+                divide_by += 1
+
+        if divide_by != 0:
+            total_expected_score /= divide_by
+
+        maximum_expected_score = 4
+        self.assertLess(total_expected_score, maximum_expected_score)
+
+
+    def test_get_message_score(self):
+        content = "I am considering to purchase a car."
+        actual_scores = self.handler.get_message_score(content)
+
+        self.assertGreater(actual_scores['grammar'], 8)
+
+
+    def test_get_response(self):
+        content = "How are you feeling?"
+        response = self.handler.get_response(content)
+
+        self.assertNotEqual(response, None)
 
 
 if __name__ == '__main__':
