@@ -2,8 +2,8 @@ import discord
 import os
 import json
 
-class DiscordBot(discord.Client):
 
+class DiscordBot(discord.Client):
     def __init__(self, intents, openai_handler, log_file_path, user_scores_path):
         """
         Initializes a new instance of the DiscordBot class.
@@ -21,7 +21,7 @@ class DiscordBot(discord.Client):
         Prints a message to the console indicating that the bot has connected to Discord.
         """
 
-        print(f'{self.user} has connected to Discord!')
+        print(f"{self.user} has connected to Discord!")
 
     async def on_message(self, message):
         """
@@ -31,18 +31,22 @@ class DiscordBot(discord.Client):
         if not self.scan_message(message):
             return
 
-        if message.content.startswith('!help'):
-            await message.channel.send('Here, I will provide guidance on how to get the most out this bot.')
+        if message.content.startswith("!help"):
+            await message.channel.send(
+                "Here, I will provide guidance on how to get the most out this bot."
+            )
 
         self.update_log_file(message.author, message.content)
 
         scores = self.openai_handler.get_message_score(message.content)
         for label, score in scores.items():
             if not score == -1001:
-                await message.channel.send(label.capitalize() + ' score: ' + str(score))
+                await message.channel.send(label.capitalize() + " score: " + str(score))
             else:
                 scores[label] = 0
-                await message.channel.send('Something went wrong, your score remained the same.')
+                await message.channel.send(
+                    "Something went wrong, your score remained the same."
+                )
 
         self.update_scores(message.author.id)
 
@@ -68,7 +72,7 @@ class DiscordBot(discord.Client):
         """
         Saves the updated scores
         """
-        self.user_scores[user_id]['grammar'] += scores['grammar']
+        self.user_scores[user_id]["grammar"] += scores["grammar"]
         self.save_user_scores()
 
     def load_user_scores(self):
@@ -79,14 +83,14 @@ class DiscordBot(discord.Client):
         if not os.path.exists(self.user_scores_path):
             return {}
 
-        with open(self.user_scores_path, 'r') as file:
+        with open(self.user_scores_path, "r") as file:
             return json.load(file)
 
     def save_user_scores(self):
         """
         Saves the user scores to the JSON file.
         """
-        with open(self.user_scores_path, 'w') as file:
+        with open(self.user_scores_path, "w") as file:
             json.dump(self.user_scores, file)
 
     def update_log_file(self, nickname, content):
@@ -96,8 +100,8 @@ class DiscordBot(discord.Client):
         """
 
         if not os.path.exists(self.log_file_path):
-            with open(self.log_file_path, 'w') as log_file:
-                log_file.write('Log file created.\n')
+            with open(self.log_file_path, "w") as log_file:
+                log_file.write("Log file created.\n")
 
-        with open(self.log_file_path, 'a') as log_file:
-            log_file.write(f'{nickname}: {content}\n')
+        with open(self.log_file_path, "a") as log_file:
+            log_file.write(f"{nickname}: {content}\n")
