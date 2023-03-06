@@ -6,14 +6,6 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 ![](https://img.shields.io/github/issues/ulasonat/ChatWizard)
 
 
-**TEST COVERAGE (HW4)**
-| Filename      | Coverage |
-| ----------- | ----------- |
-| *discord_bot.py*       | 68%       |
-| *openai_handler.py*   | 89%        |
-| **TOTAL COVERAGE**  | 80.4%        |
-
-
 ## Prerequisites 
 
 To execute the program, you will need to have:
@@ -30,8 +22,16 @@ To execute the program, you will need to have:
 To execute the Discord bot:
 <code>python3 main.py</code>
 
-To test the code:
-<code>python3 unit_tests.py</code>
+## Test & Coverage
+
+<code>make test</code>
+<code>make coverage</code>
+
+| Filename      | Coverage |
+| ----------- | ----------- |
+| *discord_bot.py*       | 68%       |
+| *openai_handler.py*   | 89%        |
+| **TOTAL COVERAGE**  | 80.4%        |
 
 
 
