@@ -109,7 +109,6 @@ class TestOpenAIHandler(unittest.TestCase):
     def test_get_grammar_score_valid(self):
         content = "Hello, how are you doing today?"
 
-        # Set up the test_prompt file in the format required to test the get_grammar_score method
         test_prompt = f"This is a test prompt\n\nQ: {content}\nA:"
         with open(self.handler.grammar_prompt_path, 'w') as file:
             file.write(test_prompt)
@@ -121,7 +120,6 @@ class TestOpenAIHandler(unittest.TestCase):
     def test_get_grammar_score_invalid(self):
         content = "I is going out"
 
-        # Set up the test_prompt file in the format required to test the get_grammar_score method
         test_prompt = f"This is a test prompt\n\nQ: {content}\nA:"
         with open(self.handler.grammar_prompt_path, 'w') as file:
             file.write(test_prompt)
@@ -139,10 +137,4 @@ class TestOpenAIHandler(unittest.TestCase):
 
 if __name__ == '__main__':
 
-    cov = coverage.Coverage()
-    cov.start()
-
     unittest.main()
-
-    cov.stop()
-    cov.report()
