@@ -38,10 +38,10 @@ annotate:  ## run type checking
 #########
 # TESTS #
 #########
-test: ## run the unit tests
+test: ## run the unit tests (after switching to scripts/ folder):
 	python -m coverage run unit_tests.py
 
-coverage:  ## after executing the test
+coverage:  ## to run it from the main folder and to get all coverage info
 	python -m pytest -v scripts/unit_tests.py --cov=scripts --cov-branch --cov-fail-under=50 --cov-report term-missing
 
 # Alias
