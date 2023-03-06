@@ -1,6 +1,7 @@
 import openai
 import re
 
+
 class OpenAIHandler:
     def __init__(self, api_key, grammar_prompt_path):
         """
@@ -20,30 +21,25 @@ class OpenAIHandler:
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": content},
-            ]
+            ],
         )
-        return response.choices[0]['message']['content']
+        return response.choices[0]["message"]["content"]
 
     def generate_default_scores(self):
         """
         Generates default scores for each category.
         """
-        return {
-            'grammar': 100
-        }
+        return {"grammar": 100}
 
     def get_message_score(self, content):
         """
         Processes the text and generates various scores on different categories.
         """
 
-        return {
-            'grammar': self.get_grammar_score(content)
-        }
+        return {"grammar": self.get_grammar_score(content)}
 
     def get_grammar_score(self, content):
-
-        with open(self.grammar_prompt_path, 'r') as file:
+        with open(self.grammar_prompt_path, "r") as file:
             prompt = file.read()
 
         prompt += content
@@ -53,10 +49,10 @@ class OpenAIHandler:
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": prompt},
-                ]
+                ],
             )
 
-            grammar_score = response.choices[0]['message']['content']
+            grammar_score = response.choices[0]["message"]["content"]
 
             grammar_score = int(grammar_score)
             grammar_score = ((grammar_score / 5) - 1) * 10
@@ -65,8 +61,8 @@ class OpenAIHandler:
                 return -1001
 
         except openai.error.AuthenticationError:
-                print('No API key provided')
-                return -1001
+            print("No API key provided")
+            return -1001
 
         except:  # means something went wrong while processing the text, I return the error code to ignore this calculation
             return -1001
