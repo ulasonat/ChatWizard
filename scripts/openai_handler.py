@@ -48,20 +48,24 @@ class OpenAIHandler:
 
         prompt += content
 
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": prompt},
-            ]
-        )
-
-        grammar_score = response.choices[0]['message']['content']
-
         try:
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": prompt},
+                ]
+            )
+
+            grammar_score = response.choices[0]['message']['content']
+
             grammar_score = int(grammar_score)
             grammar_score = ((grammar_score / 5) - 1) * 10
 
             if grammar_score < -10 or grammar_score > 10:
+                return -1001
+
+        except openai.error.AuthenticationError:
+                print('No API key provided')
                 return -1001
 
         except:  # means something went wrong while processing the text, I return the error code to ignore this calculation
