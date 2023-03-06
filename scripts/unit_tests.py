@@ -111,17 +111,6 @@ def test_generate_default_scores(handler):
     assert test_data == {'grammar': 100}
 
 
-def test_get_grammar_score_valid(handler):
-    content = "Hello, how are you doing today?"
-
-    test_prompt = f"This is a test prompt\n\nQ: {content}\nA:"
-    with open(handler.grammar_prompt_path, 'w') as file:
-        file.write(test_prompt)
-
-    expected_score = 10
-    # assert handler.get_grammar_score(content) == expected_score
-
-
 def test_get_grammar_score_invalid(handler):
     content = "I is going out"
 
@@ -130,11 +119,5 @@ def test_get_grammar_score_invalid(handler):
         file.write(test_prompt)
 
     expected_score = -1001
-    # assert handler.get_grammar_score(content) == expected_score
-
-
-def test_get_message_score(handler):
-    content = "I am considering to purchase a car."
-    # actual_scores = handler.get_message_score(content)
-
-    # assert actual_scores['grammar'] > 0
+    print(handler.get_grammar_score)
+    assert handler.get_grammar_score(content) == expected_score
