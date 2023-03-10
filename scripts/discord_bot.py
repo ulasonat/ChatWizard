@@ -4,8 +4,7 @@ import json
 
 
 class DiscordBot(discord.Client):
-    def __init__(self, intents, openai_handler, log_file_path,
-                 user_scores_path):
+    def __init__(self, intents, openai_handler, log_file_path, user_scores_path):
         """
         Initializes a new instance of the DiscordBot class.
         """
@@ -36,23 +35,17 @@ class DiscordBot(discord.Client):
             return
 
         if message.content.startswith("!help"):
-            await message.channel.send(
-                "Here, I will provide guidance on "
-                "how to get the most out this bot."
-            )
+            await message.channel.send("Here, I will provide guidance on " "how to get the most out this bot.")
 
         self.update_log_file(message.author, message.content)
 
         scores = self.openai_handler.get_message_score(message.content)
         for label, score in scores.items():
             if not score == -1001:
-                await message.channel.send(label.capitalize()
-                                           + " score: " + str(score))
+                await message.channel.send(label.capitalize() + " score: " + str(score))
             else:
                 scores[label] = 0
-                await message.channel.send(
-                    "Something went wrong, your score remained the same."
-                )
+                await message.channel.send("Something went wrong, your score remained the same.")
 
         self.update_scores(message.author.id, scores)
 
@@ -72,8 +65,7 @@ class DiscordBot(discord.Client):
         scores from the most recent message they sent
         """
         if user_id not in self.user_scores:
-            self.user_scores[user_id] = \
-                self.openai_handler.generate_default_scores()
+            self.user_scores[user_id] = self.openai_handler.generate_default_scores()
 
         self.save_updated_scores(user_id, scores)
 
