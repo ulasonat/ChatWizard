@@ -1,5 +1,4 @@
 import openai
-import re
 
 
 class OpenAIHandler:
@@ -64,7 +63,7 @@ class OpenAIHandler:
             print("No API key provided")
             return -1001
 
-        except:  # means something went wrong while processing the text, I return the error code to ignore this calculation
+        except ValueError:  # meaning API did not produce a pure number
             return -1001
 
         return grammar_score

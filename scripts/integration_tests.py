@@ -31,9 +31,7 @@ class TestIntegration:
         await self.bot.on_message(mock_discord_message)
 
         assert self.bot.last_message is not None
-        self.mock_openai_handler.get_message_score.assert_called_once_with(
-            mock_discord_message.content
-        )
+        self.mock_openai_handler.get_message_score.assert_called_once_with(mock_discord_message.content)
 
     async def test_update_scores(self):
         self.bot.user_scores = {}
@@ -63,16 +61,16 @@ class TestIntegration:
         test_nickname = "test_user"
         test_content = "test message"
 
-        with patch("os.path.exists", return_value=False), patch(
-            "builtins.open", create=True
-        ), patch("builtins.print") as mock_print:
+        with patch("os.path.exists", return_value=False), patch("builtins.open", create=True), patch(
+            "builtins.print"
+        ) as mock_print:
             self.bot.update_log_file(test_nickname, test_content)
 
         mock_print.assert_called_once_with("Log file created.\n")
 
-        with patch("os.path.exists", return_value=True), patch(
-            "builtins.open", create=True
-        ), patch("builtins.print") as mock_print:
+        with patch("os.path.exists", return_value=True), patch("builtins.open", create=True), patch(
+            "builtins.print"
+        ) as mock_print:
             self.bot.update_log_file(test_nickname, test_content)
 
         mock_print.assert_not_called()
