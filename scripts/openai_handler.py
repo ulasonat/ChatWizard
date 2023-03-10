@@ -1,5 +1,6 @@
 import openai
 
+
 class OpenAIHandler:
     def __init__(self, api_key, grammar_prompt_path):
         """
