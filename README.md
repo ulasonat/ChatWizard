@@ -4,6 +4,8 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 
 ![](https://img.shields.io/github/license/ulasonat/prime-video-plus?color=blue&label=License)
 ![](https://img.shields.io/github/issues/ulasonat/ChatWizard)
+[![Build Status](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/ulasonat/ChatWizard/branch/main/graph/badge.svg?token=G2AE2OWNO3)](https://codecov.io/gh/ulasonat/ChatWizard)
 
 
 ## Prerequisites 
@@ -16,7 +18,6 @@ To execute the program, you will need to have:
   - `discord`
   - `openai`
   - `faker`
-  - `coverage`
 
 
 To execute the Discord bot:
@@ -26,13 +27,6 @@ To execute the Discord bot:
 
 <code>make test</code>
 <code>make coverage</code>
-
-| Filename      | Coverage |
-| ----------- | ----------- |
-| *discord_bot.py*       | 68%       |
-| *openai_handler.py*   | 89%        |
-| **TOTAL COVERAGE**  | 80.4%        |
-
 
 
 ## Overview
