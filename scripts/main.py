@@ -22,4 +22,6 @@ bot = DiscordBot(
     log_file_path=log_file_path,
     user_scores_path=user_scores_path,
 )
-bot.run(discord_api_key)
+
+if discord_api_key and openai_handler:
+    bot.run(discord_api_key)
