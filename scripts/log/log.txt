@@ -78,3 +78,38 @@ Deans#5213: !reset
 Deans#5213: !me
 Deans#5213: !help
 Deans#5213: !me
+Deans#5213: !help
+Deans#5213: !me
+Deans#5213: !reset
+Deans#5213: !me
+Deans#5213: !me
+Deans#5213: !help
+Deans#5213: !reset
+Deans#5213: how are you doing
+Deans#5213: \u001b[{0};{31}m
+Deans#5213: !me
+Deans#5213: yoo
+Deans#5213: !me
+Deans#5213: !reset
+Deans#5213: !me
+Deans#5213: how are you doing
+Deans#5213: !me
+Deans#5213: !reset
+Deans#5213: how are you doing
+Deans#5213: I hope it is going well
+Deans#5213: !me
+Deans#5213: !help
+Deans#5213: !me
+Deans#5213: !reset
+Deans#5213: !me
+Deans#5213: how are you doing
+Deans#5213: nice job
+Deans#5213: !me
+Deans#5213: !me
+Deans#5213: !reset
+Deans#5213: another love
+Deans#5213: another love
+Deans#5213: all my tears
+Deans#5213: !me
+Deans#5213: !reset
+Deans#5213: !me
