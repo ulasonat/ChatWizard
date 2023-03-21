@@ -30,9 +30,9 @@ class OpenAIHandler:
         """
         Generates default scores for each category.
         """
-        return {"grammar": 100,
-                "friendliness": 100,
-                "humor": 100}
+        return {"grammar": 10,
+                "friendliness": 10,
+                "humor": 10}
 
     def get_message_score(self, content):
         """

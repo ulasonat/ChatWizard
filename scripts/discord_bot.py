@@ -34,22 +34,32 @@ class DiscordBot(discord.Client):
         if not self.scan_message(message):
             return
 
-        if message.content.startswith("!help"):
-            await message.channel.send("Here, I will provide guidance on " "how to get the most out this bot.")
-
         self.update_log_file(message.author, message.content)
 
-        scores = self.openai_handler.get_message_score(message.content)
-        for label, score in scores.items():
-            if not score == -1001:
-                results = label.capitalize() + ": " + self.get_corresponding_word(label, score)
-                await message.channel.send(results)
+        if message.content.startswith("!help"):
+            await message.channel.send("!help: To get help\n!me: To see your stats")
+
+        elif message.content.startswith("!me"):
+            if str(message.author.id) not in self.user_scores:
+                await message.channel.send("Sorry, I couldn't find your scores.")
             else:
-                scores[label] = 0
-                text = label.capitalize() + ": " + " Not calculated"
+                self.user_scores = self.load_user_scores()
+                particular_scores = self.user_scores[str(message.author.id)]
+                text = f"Your scores: \nGrammar: {particular_scores['grammar']}\nFriendliness: {particular_scores['friendliness']}\nHumor: {particular_scores['humor']}"
                 await message.channel.send(text)
 
-        self.update_scores(message.author.id, scores)
+        else:
+            scores = self.openai_handler.get_message_score(message.content)
+            for label, score in scores.items():
+                if not score == -1001:
+                    results = label.capitalize() + ": " + self.get_corresponding_word(label, score)
+                    await message.channel.send(results)
+                else:
+                    scores[label] = 0
+                    text = label.capitalize() + ": " + " Not calculated"
+                    await message.channel.send(text)
+
+            self.update_scores(message.author.id, scores)
 
     def scan_message(self, message):
         """
