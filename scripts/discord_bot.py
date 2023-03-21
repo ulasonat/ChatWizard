@@ -76,7 +76,7 @@ class DiscordBot(discord.Client):
 
         else:
             scores = self.openai_handler.get_message_score(message.content)
-            final_text = "Text: **" + message.content + "**\n\n"
+            final_text = str()
             for label, score in scores.items():
                 if not score == -1001:
                     results = label.capitalize() + ": **" + self.get_corresponding_word(label, score) + "**\n"
@@ -88,7 +88,7 @@ class DiscordBot(discord.Client):
 
             self.update_scores(message.author.id, scores)
 
-            embed = discord.Embed(title="Text Analysis", url="https://realdrewdata.medium.com/",
+            embed = discord.Embed(title=message.content, url="https://realdrewdata.medium.com/",
                                   description=final_text,
                                   color=discord.Color.blue())
 
