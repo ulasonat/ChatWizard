@@ -37,7 +37,11 @@ class DiscordBot(discord.Client):
         self.update_log_file(message.author, message.content)
 
         if message.content.startswith("!help"):
-            await message.channel.send("!help: To get help\n!me: To see your stats")
+            embed = discord.Embed(title="Help on the way!", url="https://realdrewdata.medium.com/",
+                                  description="!help: To get help\n!me: To see your stats\n!reset: Reset your stats",
+                                  color=0xFF5733)
+
+            await message.channel.send(embed=embed)
 
         elif message.content.startswith("!me"):
             if str(message.author.id) not in self.user_scores:
@@ -47,6 +51,23 @@ class DiscordBot(discord.Client):
                 particular_scores = self.user_scores[str(message.author.id)]
                 text = f"Your scores: \nGrammar: {particular_scores['grammar']}\nFriendliness: {particular_scores['friendliness']}\nHumor: {particular_scores['humor']}"
                 await message.channel.send(text)
+
+        elif message.content.startswith("!embed"):
+            embed = discord.Embed(title="Sample Embed", url="https://realdrewdata.medium.com/",
+                                  description="This is an embed that will show how to build an embed and the different components",
+                                  color=0xFF5733)
+            await message.channel.send(embed=embed)
+
+        elif message.content.startswith("!reset"):
+            default_scores = self.openai_handler.generate_default_scores()
+            self.user_scores[message.author.id] = default_scores
+            self.save_user_scores()
+
+            embed = discord.Embed(title="Success!", url="https://realdrewdata.medium.com/",
+                                  description="Your scores have reset!",
+                                  color=0xFF5733)
+
+            await message.channel.send(embed=embed)
 
         else:
             scores = self.openai_handler.get_message_score(message.content)
