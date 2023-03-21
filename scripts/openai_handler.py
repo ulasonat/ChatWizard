@@ -51,7 +51,7 @@ class OpenAIHandler:
 
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": prompt},
                 ],
@@ -72,7 +72,12 @@ class OpenAIHandler:
         except ValueError:  # meaning API did not produce a pure number
             return -1001
 
-        return grammar_score
+        if grammar_score <= 0:
+            return -1
+        if grammar_score == 0:
+            return 0
+        if grammar_score >= 0:
+            return 1
 
     def get_friendliness_score(self, content):
         with open(self.friendliness_prompt_path, "r") as file:
@@ -82,7 +87,7 @@ class OpenAIHandler:
 
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": prompt},
                 ],
@@ -103,7 +108,12 @@ class OpenAIHandler:
         except ValueError:  # meaning API did not produce a pure number
             return -1001
 
-        return friendliness_score
+        if friendliness_score <= 0:
+            return -1
+        if friendliness_score == 0:
+            return 0
+        if friendliness_score >= 0:
+            return 1
 
     def get_humor_score(self, content):
         with open(self.humor_prompt_path, "r") as file:
@@ -113,7 +123,7 @@ class OpenAIHandler:
 
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": prompt},
                 ],
@@ -134,4 +144,9 @@ class OpenAIHandler:
         except ValueError:  # meaning API did not produce a pure number
             return -1001
 
-        return humor_score
+        if humor_score <= 0:
+            return -1
+        if humor_score == 0:
+            return 0
+        if humor_score >= 0:
+            return 1

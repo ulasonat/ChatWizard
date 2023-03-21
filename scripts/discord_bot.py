@@ -42,10 +42,12 @@ class DiscordBot(discord.Client):
         scores = self.openai_handler.get_message_score(message.content)
         for label, score in scores.items():
             if not score == -1001:
-                await message.channel.send(label.capitalize() + " score: " + str(score))
+                results = label.capitalize() + ": " + self.get_corresponding_word(label, score)
+                await message.channel.send(results)
             else:
                 scores[label] = 0
-                await message.channel.send("Something went wrong, your score remained the same.")
+                text = label.capitalize() + ": " + " Not calculated"
+                await message.channel.send(text)
 
         self.update_scores(message.author.id, scores)
 
@@ -108,3 +110,27 @@ class DiscordBot(discord.Client):
 
         with open(self.log_file_path, "a") as log_file:
             log_file.write(f"{nickname}: {content}\n")
+
+    def get_corresponding_word(self, label, score):
+        print(label, score)
+        if label == 'grammar':
+            if score == 1:
+                return 'Appropriate'
+            if score == 0:
+                return 'Mediocre'
+            if score == -1:
+                return 'Bad'
+        elif label == 'friendliness':
+            if score == 1:
+                return 'Friendly'
+            if score == 0:
+                return 'Natural'
+            if score == -1:
+                return 'Not friendly'
+        elif label == 'humor':
+            if score == 1:
+                return 'Funny'
+            if score == 0:
+                return 'Mediocre'
+            if score == -1:
+                return 'Not funny'
