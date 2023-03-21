@@ -17,7 +17,8 @@ class OpenAIHandler:
         """
         Sends a prompt to the OpenAI API and returns the generated response.
         """
-        # The code below returns a response using OpenAI based on the message.content that will be passed
+        # The code below returns a response using
+        # OpenAI based on the message.content that will be passed
         response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
@@ -30,18 +31,19 @@ class OpenAIHandler:
         """
         Generates default scores for each category.
         """
-        return {"grammar": 10,
-                "friendliness": 10,
-                "humor": 10}
+        return {"grammar": 10, "friendliness": 10, "humor": 10}
 
     def get_message_score(self, content):
         """
-        Processes the text and generates various scores on different categories.
+        Processes the text and generates various
+         scores on different categories.
         """
 
-        return {"grammar": self.get_grammar_score(content),
-                "friendliness": self.get_friendliness_score(content),
-                "humor": self.get_humor_score(content)}
+        return {
+            "grammar": self.get_grammar_score(content),
+            "friendliness": self.get_friendliness_score(content),
+            "humor": self.get_humor_score(content),
+        }
 
     def get_grammar_score(self, content):
         with open(self.grammar_prompt_path, "r") as file:

@@ -1,5 +1,4 @@
 import discord
-import os
 from unittest.mock import MagicMock, patch
 from discord_bot import DiscordBot
 from openai_handler import OpenAIHandler
