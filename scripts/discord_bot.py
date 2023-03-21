@@ -74,6 +74,8 @@ class DiscordBot(discord.Client):
         Saves the updated scores
         """
         self.user_scores[user_id]["grammar"] += scores["grammar"]
+        self.user_scores[user_id]["friendliness"] += scores["friendliness"]
+        self.user_scores[user_id]["humor"] += scores["humor"]
         self.save_user_scores()
 
     def load_user_scores(self):
