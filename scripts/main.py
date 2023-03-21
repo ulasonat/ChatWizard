@@ -7,9 +7,6 @@ from discord_bot import DiscordBot
 open_ai_api_key = sys.argv[1]
 discord_api_key = sys.argv[2]
 
-print(open_ai_api_key)
-print(discord_api_key)
-
 log_file_path = "log/log.txt"
 user_scores_path = "json/user_scores.json"
 grammar_prompt_path = "prompts/grammar.txt"
