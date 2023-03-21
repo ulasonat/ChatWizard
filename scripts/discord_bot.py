@@ -34,20 +34,65 @@ class DiscordBot(discord.Client):
         if not self.scan_message(message):
             return
 
-        if message.content.startswith("!help"):
-            await message.channel.send("Here, I will provide guidance on " "how to get the most out this bot.")
-
         self.update_log_file(message.author, message.content)
 
-        scores = self.openai_handler.get_message_score(message.content)
-        for label, score in scores.items():
-            if not score == -1001:
-                await message.channel.send(label.capitalize() + " score: " + str(score))
-            else:
-                scores[label] = 0
-                await message.channel.send("Something went wrong, your score remained the same.")
+        if message.content.startswith("!help"):
+            embed = discord.Embed(title="Help on the way!", url="https://realdrewdata.medium.com/",
+                                  description="**!help:** To get help\n**!me:** To see your stats"
+                                              "\n**!reset:** Reset your stats",
+                                  color=discord.Color.blue())
 
-        self.update_scores(message.author.id, scores)
+            await message.channel.send(embed=embed)
+
+        elif message.content.startswith("!me"):
+            if str(message.author.id) not in self.user_scores:
+                embed = discord.Embed(title="Failure :(", url="https://realdrewdata.medium.com/",
+                                      description="Sorry, I couldn't find your scores.",
+                                      color=discord.Color.red())
+
+                await message.channel.send(embed=embed)
+            else:
+                self.user_scores = self.load_user_scores()
+                particular_scores = self.user_scores[str(message.author.id)]
+                text = f"Grammar:** {particular_scores['grammar']}**\n" \
+                       f"Friendliness:** {particular_scores['friendliness']}**\nHumor:** {particular_scores['humor']}**"
+
+                embed = discord.Embed(title="Here are your scores!", url="https://realdrewdata.medium.com/",
+                                      description=text,
+                                      color=discord.Color.blue())
+
+                await message.channel.send(embed=embed)
+
+        elif message.content.startswith("!reset"):
+            default_scores = self.openai_handler.generate_default_scores()
+            self.user_scores[message.author.id] = default_scores
+            self.save_user_scores()
+
+            embed = discord.Embed(title="Success!", url="https://realdrewdata.medium.com/",
+                                  description="**Your scores have reset!**",
+                                  color=discord.Color.blue())
+
+            await message.channel.send(embed=embed)
+
+        else:
+            scores = self.openai_handler.get_message_score(message.content)
+            final_text = str()
+            for label, score in scores.items():
+                if not score == -1001:
+                    results = label.capitalize() + ": **" + self.get_corresponding_word(label, score) + "**\n"
+                    final_text += results
+                else:
+                    scores[label] = 0
+                    text = label.capitalize() + ":**" + " Not calculated\n**"
+                    final_text += text
+
+            self.update_scores(message.author.id, scores)
+
+            embed = discord.Embed(title=message.content, url="https://realdrewdata.medium.com/",
+                                  description=final_text,
+                                  color=discord.Color.blue())
+
+            await message.channel.send(embed=embed)
 
     def scan_message(self, message):
         """
@@ -74,6 +119,8 @@ class DiscordBot(discord.Client):
         Saves the updated scores
         """
         self.user_scores[user_id]["grammar"] += scores["grammar"]
+        self.user_scores[user_id]["friendliness"] += scores["friendliness"]
+        self.user_scores[user_id]["humor"] += scores["humor"]
         self.save_user_scores()
 
     def load_user_scores(self):
@@ -106,3 +153,26 @@ class DiscordBot(discord.Client):
 
         with open(self.log_file_path, "a") as log_file:
             log_file.write(f"{nickname}: {content}\n")
+
+    def get_corresponding_word(self, label, score):
+        if label == 'grammar':
+            if score == 1:
+                return 'Appropriate'
+            if score == 0:
+                return 'Mediocre'
+            if score == -1:
+                return 'Bad'
+        elif label == 'friendliness':
+            if score == 1:
+                return 'Friendly'
+            if score == 0:
+                return 'Natural'
+            if score == -1:
+                return 'Not friendly'
+        elif label == 'humor':
+            if score == 1:
+                return 'Funny'
+            if score == 0:
+                return 'Mediocre'
+            if score == -1:
+                return 'Not funny'

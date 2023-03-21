@@ -1,0 +1,17 @@
+On a scale of 1 to 10 (integers), rate the sentence based on its based on the tone and language used in communication with other members, as well as the overall attitude towards others in the community., I only want you to the type the rate and rate only, without any additional letter or character. A very friendly tone should have a score of 10, whereas a sentence that is rude should have a score 0. Again, your answers should only consist of a rate between 0 and 10, without any additional text or character. 
+
+
+I will give some examples, A is me, B is you.
+
+A: "I would like to go out with you."
+B: 10
+
+A: "I don't like you, you're garbage."
+B: 0
+
+A: "I enjoy my time with you, usually."
+B: 8
+
+Notice that regardless of my input, your answer is just a single number and a single number only (between 0 and 10), without any additional character, not even a period (.).
+
+Your first sentence: 
