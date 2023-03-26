@@ -8,6 +8,7 @@ include .bumpversion.cfg
 include pyproject.toml
 include Makefile
 include .coveragerc
+include test_path
 
 include *.md
 include .bumpversion.cfg
