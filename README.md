@@ -8,32 +8,74 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 [![codecov](https://codecov.io/gh/ulasonat/ChatWizard/branch/main/graph/badge.svg?token=G2AE2OWNO3)](https://codecov.io/gh/ulasonat/ChatWizard)
 
 
-## Prerequisites 
+# ChatWizard
 
-To execute the program, you will need to have:
-- Python 3 installed
-- An OpenAI API key
-- A Discord API key
-- The following packages imported:
-  - `discord`
-  - `openai`
-  - `faker`
+ChatWizard is a Discord bot that encourages positivity within a server by analyzing and scoring each member's behavior. It uses OpenAI's GPT-3.5-turbo to assess members based on factors such as helpfulness, language use, friendliness, and humor. With ChatWizard, you can create a more welcoming, engaging, and supportive environment for everyone in your server.
 
+## Features
 
-To execute the Discord bot:
-<code>python3 main.py</code>
+- Analyzes and scores server members based on grammar, friendliness, and humor.
+- Encourages and rewards positive contributions to the server.
+- Provides a score breakdown so members can see how they're performing in each category.
+- Logs all messages sent, making it easy to review member behavior.
 
-## Test & Coverage
+## Dependencies 
+1. Python 3.6 or higher
+2. `discord.py` module (v1.7.3 or higher)
+3. `openai` module (v0.11.1 or higher)
+4. OpenAI API key (v4)
+5. A Discord user account and server
 
-<code>make test</code>
-<code>make coverage</code>
+## Installation
 
+1. Clone this repository:
+```bash
+git clone https://github.com/ulasonat/ChatWizard.git
+```
 
-## Overview
-The bot will assess members based on factors such as helpfulness and language use to encourage and reward positive contributions. Whether you're looking to improve the overall tone of your server or simply incentivize positive behavior, ChatWizard can help create a more welcoming and supportive environment for everyone!
+2. Install the required third-party packages:
+```bash
+pip install discord
+pip install openai
+```
 
-## How will it work?
-Our bot will leverage the OpenAI API to analyze members' text and assign them scores based on various categories. For example, if a member writes something like <em>"Sure, let me know if you have any questions."</em>, this will increase their helpfulness score and the bot may assign them a <em>Helper</em> role if they continue to exhibit helpful behavior. With our bot, users can be recognized and rewarded for their contributions, while also helping to create a more positive and supportive community within the server.
+3. Set up the following environment variables, replacing `your_discord_api_key` and `your_openai_api_key` with your actual API keys:
 
-## Which technologies?
-The main programming language for the project is Python, while the main APIs will be the OpenAI and Discord.
+   For bash:
+   ```bash
+   export DISCORD_API_KEY="your_discord_api_key"
+   export OPENAI_API_KEY="your_openai_api_key"
+   ```
+
+   For Windows cmd:
+   ```cmd
+   set DISCORD_API_KEY="your_discord_api_key"
+   set OPENAI_API_KEY="your_openai_api_key"
+   ```
+4. Invite the bot to your server through Discord Developer Portal.
+
+5. Usage
+
+To run the application, execute the following command in your terminal/cmd prompt:
+``` bash
+python main.py <openai_api_key> <discord_api_key>
+```
+
+Alternatively, you can import the library and call the main.run function by passing the Discord API key, OpenAI API key as arguments. Then, run the bot using the `run` method.
+
+```python
+run(discord_api_key, openai_api_key)
+```
+
+## Bot Commands
+
+- To get help: `!help`
+- To view your scores: `!me`
+- To reset your scores: `!reset`
+
+After sending a message, ChatWizard will reply with an embed showing the score breakdown for that message.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request for any bug fixes or new features you would like to add. 
+Check the ```CONTRIBUTING.md``` for details!
