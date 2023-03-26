@@ -8,7 +8,7 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 [![codecov](https://codecov.io/gh/ulasonat/ChatWizard/branch/main/graph/badge.svg?token=G2AE2OWNO3)](https://codecov.io/gh/ulasonat/ChatWizard)
 
 
-# ChatWizard
+## Overview
 
 ChatWizard is a Discord bot that encourages positivity within a server by analyzing and scoring each member's behavior. It uses OpenAI's GPT-3.5-turbo to assess members based on factors such as helpfulness, language use, friendliness, and humor. With ChatWizard, you can create a more welcoming, engaging, and supportive environment for everyone in your server.
 
