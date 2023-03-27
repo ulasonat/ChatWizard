@@ -9,8 +9,5 @@ setup(
     maintainer='Ulas Onat Alakent',
     maintainer_email='ulas.alakent@columbia.edu',
     url='https://github.com/ulasonat/ChatWizard',
-    install_requires=[
-        'openai',
-        'discord'
-    ]
+    install_requires=['openai', 'discord'],
 )
