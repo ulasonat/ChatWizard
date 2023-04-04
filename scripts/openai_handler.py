@@ -1,10 +1,30 @@
+"""
+This script handles interactions with OpenAI's GPT-3.5-turbo API and includes methods to calculate scores in three categories:
+grammar, friendliness, and humor.
+"""
+
 import openai
 
 
 class OpenAIHandler:
+    """
+    Initializes a new instance of the OpenAIHandler class.
+
+    Parameters:
+        api_key (str): API key for OpenAI API
+        grammar_prompt_path (str): Path to grammar prompt text file
+        friendliness_prompt_path (str): Path to friendliness prompt text file
+        humor_prompt_path (str): Path to humor prompt text file
+    """
     def __init__(self, api_key, grammar_prompt_path, friendliness_prompt_path, humor_prompt_path):
         """
         Initializes a new instance of the OpenAIHandler class.
+        
+        Parameters:
+            api_key (str): API key for OpenAI API 
+            grammar_prompt_path (str): path to grammar prompt text file
+            friendliness_prompt_path (str): path to friendliness prompt text file
+            humor_prompt_path (str): path to humor prompt text file
         """
         self.api_key = api_key
         self.grammar_prompt_path = grammar_prompt_path
@@ -16,9 +36,13 @@ class OpenAIHandler:
     def get_response(self, content):
         """
         Sends a prompt to the OpenAI API and returns the generated response.
+        
+        Parameters:
+            content (str): text input prompt for OpenAI API
+            
+        Returns:
+            str: generated response from OpenAI API
         """
-        # The code below returns a response using
-        # OpenAI based on the message.content that will be passed
         response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
@@ -30,15 +54,22 @@ class OpenAIHandler:
     def generate_default_scores(self):
         """
         Generates default scores for each category.
+        
+        Returns:
+            dict: default scores for each category
         """
         return {"grammar": 10, "friendliness": 10, "humor": 10}
 
     def get_message_score(self, content):
         """
-        Processes the text and generates various
-         scores on different categories.
+        Processes the text and generates various scores on different categories.
+        
+        Parameters:
+            content (str): text to generate score for
+            
+        Returns:
+            dict: scores for each category
         """
-
         return {
             "grammar": self.get_grammar_score(content),
             "friendliness": self.get_friendliness_score(content),
@@ -46,6 +77,15 @@ class OpenAIHandler:
         }
 
     def get_grammar_score(self, content):
+        """
+        Calculates the grammar score for a given message.
+        
+        Parameters:
+            content (str): text to generate score for
+            
+        Returns:
+            int: grammar score [-1, 0, 1]
+        """
         with open(self.grammar_prompt_path, "r") as file:
             prompt = file.read()
 
@@ -82,6 +122,15 @@ class OpenAIHandler:
             return 1
 
     def get_friendliness_score(self, content):
+        """
+        Calculates the friendliness score for a given message.
+        
+        Parameters:
+            content (str): text to generate score for
+            
+        Returns:
+            int: friendliness score [-1, 0, 1]
+        """
         with open(self.friendliness_prompt_path, "r") as file:
             prompt = file.read()
 
@@ -118,6 +167,19 @@ class OpenAIHandler:
             return 1
 
     def get_humor_score(self, content):
+        """
+        Calculates the humor score for a given message.
+        
+        Parameters:
+            content (str): text to generate score for
+            
+        Returns:
+            int: humor score [-1, 0, 1]
+            
+        Raises:
+            AuthenticationError: raised if no API key provided
+            ValueError: raised if API does not produce pure numerical output
+        """
         with open(self.humor_prompt_path, "r") as file:
             prompt = file.read()
 

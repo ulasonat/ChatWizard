@@ -1,12 +1,26 @@
+"""
+This script contains the implementation of the DiscordBot class, which is responsible for interacting with the Discord API and OpenAI's GPT-3.5-turbo API to analyze and score members' behavior based on different categories.
+"""
+
 import discord
 import os
 import json
 
 
 class DiscordBot(discord.Client):
+    """
+    A class that represents a Discord bot that encourages positivity
+    within a server by analyzing and scoring each member's behavior.
+    """
     def __init__(self, intents, openai_handler, log_file_path, user_scores_path):
         """
         Initializes a new instance of the DiscordBot class.
+
+        Parameters:
+            intents (discord.Intents): The intents of the discord client.
+            openai_handler (OpenAIHandler): The OpenAI API handler for the bot.
+            log_file_path (str): The log file path to store logs.
+            user_scores_path (str): The user scores file path to store user scores.
         """
 
         super().__init__(intents=intents)
@@ -18,17 +32,20 @@ class DiscordBot(discord.Client):
 
     async def on_ready(self):
         """
-        A callback method that is called when the bot connects
-         to the Discord API.
-        Prints a message to the console indicating that the
-        bot has connected to Discord.
+        A callback method that is called when bot connects to Discord.
+        It prints a message to the console indicating that the bot has connected to Discord.
         """
+        
         print(f"{self.user} has connected to Discord!")
 
     async def on_message(self, message):
         """
-        A callback method that is called when the bot
-        receives a message from a user.
+        A callback method that is called when the bot receives a message from a user.
+        It processes the text and generates scores on categories such as grammar, friendliness, and humor, and
+        responds with the scores and the appropriate label.
+
+        Parameters:
+            message (discord.Message): The message recieved from the discord server.
         """
 
         if not self.scan_message(message):
@@ -115,6 +132,12 @@ class DiscordBot(discord.Client):
         """
         Returns `True` if the message was sent by a user,
         and `False` otherwise, and prints the message
+
+        Parameters:
+            message (discord.Message): The message recieved from the discord server.
+
+        Returns:
+            bool: Whether the message was sent by a user or not.
         """
         if message.author == self.user:
             return False
@@ -124,7 +147,11 @@ class DiscordBot(discord.Client):
     def update_scores(self, user_id, scores):
         """
         Updates the scores of the given user ID with the
-        scores from the most recent message they sent
+        scores from the most recent message they sent.
+
+        Parameters:
+            user_id (str): The user id whose scores needs to be updated.
+            scores (dict): A dictionary containing scores on different categories.
         """
         if user_id not in self.user_scores:
             self.user_scores[user_id] = self.openai_handler.generate_default_scores()
@@ -133,7 +160,11 @@ class DiscordBot(discord.Client):
 
     def save_updated_scores(self, user_id, scores):
         """
-        Saves the updated scores
+        Updates the scores for the given user ID with the scores from the most recent message sent by the user.
+
+        Parameters:
+            user_id (str): Unique ID of the user whose scores are being updated.
+            scores (dict): A dictionary containing the updated scores for the user.
         """
         self.user_scores[user_id]["grammar"] += scores["grammar"]
         self.user_scores[user_id]["friendliness"] += scores["friendliness"]
@@ -143,7 +174,9 @@ class DiscordBot(discord.Client):
     def load_user_scores(self):
         """
         Loads the user scores from the JSON file.
-        Returns a dictionary that maps user IDs to their scores.
+        
+        Returns:
+            dict: A dictionary that maps user IDs to their scores.
         """
         if not os.path.exists(self.user_scores_path):
             return {}
@@ -153,8 +186,9 @@ class DiscordBot(discord.Client):
 
     def save_user_scores(self):
         """
-        Saves the user scores to the JSON file.
+            Saves the user scores to the JSON file by writing the self.user_scores dictionary to the JSON file.
         """
+        
         with open(self.user_scores_path, "w") as file:
             json.dump(self.user_scores, file)
 
@@ -162,6 +196,10 @@ class DiscordBot(discord.Client):
         """
         Appends the nickname and message content to the log file.
         If the log file does not exist, creates a new log file.
+        
+        Parameters:
+            nickname (str): The nickname of the user who sent the message.
+            content (str): The content of the message.
         """
 
         if not os.path.exists(self.log_file_path):
@@ -172,6 +210,20 @@ class DiscordBot(discord.Client):
             log_file.write(f"{nickname}: {content}\n")
 
     def get_corresponding_word(self, label, score):
+        """
+        Returns the corresponding word for a given score and label.
+        
+        Parameters:
+            label (str): The label/category for the score.
+            score (int): The score in the range [-1,0,1].
+        
+        Returns:
+            str: The corresponding word for the score and label.
+        
+        Raises:
+            ValueError: If label or score are not recognized or invalid.
+        """
+        
         if label not in self.categories:
             raise ValueError
         if score not in [-1, 0, 1]:
