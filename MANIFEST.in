@@ -10,6 +10,7 @@ include Makefile
 include .coveragerc
 include test_path
 
+include *.png
 include *.md
 include .bumpversion.cfg
 include Makefile
