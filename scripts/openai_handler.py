@@ -1,5 +1,5 @@
 """
-This script handles interactions with OpenAI's GPT-3.5-turbo API and includes methods to calculate scores in three categories:
+This script handles interactions with OpenAI's API and includes methods to calculate scores in three categories:
 grammar, friendliness, and humor.
 """
 

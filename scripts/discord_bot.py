@@ -1,5 +1,6 @@
 """
-This script contains the implementation of the DiscordBot class, which is responsible for interacting with the Discord API and OpenAI's GPT-3.5-turbo API to analyze and score members' behavior based on different categories.
+This script contains the implementation of the DiscordBot class, which is responsible for interacting with the
+Discord API and OpenAI's GPT-3.5-turbo API to analyze and score members' behavior based on different categories.
 """
 
 import discord
