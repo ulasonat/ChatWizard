@@ -23,7 +23,7 @@ ChatWizard is a Discord bot that encourages positivity within a server by analyz
 
 ## Demo
 
-<img src="demo.png" alt="Demo Image" style="width:30%;height:30%;">
+<img src="demo.png" alt="Demo Image" style="width:50%;height:50%;">
 
 ## Dependencies 
 1. Python 3.6 or higher
