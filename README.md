@@ -7,7 +7,7 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 [![Build Status](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/ulasonat/ChatWizard/branch/main/graph/badge.svg?token=G2AE2OWNO3)](https://codecov.io/gh/ulasonat/ChatWizard)
 [![](https://img.shields.io/pypi/v/chatwizard?color=blue)](https://pypi.org/project/chatwizard/)
-
+[![Documentation](https://img.shields.io/badge/documentation-website-green)](https://ulasonat.github.io/ChatWizard/)
 
 
 ## Overview
@@ -20,6 +20,10 @@ ChatWizard is a Discord bot that encourages positivity within a server by analyz
 - Encourages and rewards positive contributions to the server.
 - Provides a score breakdown so members can see how they're performing in each category.
 - Logs all messages sent, making it easy to review member behavior.
+
+## Demo
+
+<img src="demo.png" alt="Demo Image" style="width:30%;height:30%;">
 
 ## Dependencies 
 1. Python 3.6 or higher
