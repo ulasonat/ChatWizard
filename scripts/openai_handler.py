@@ -1,5 +1,5 @@
 """
-This script handles interactions with OpenAI's GPT-3.5-turbo API and includes methods to calculate scores in three categories:
+This script handles interactions with OpenAI's API and includes methods to calculate scores in three categories:
 grammar, friendliness, and humor.
 """
 
@@ -16,12 +16,13 @@ class OpenAIHandler:
         friendliness_prompt_path (str): Path to friendliness prompt text file
         humor_prompt_path (str): Path to humor prompt text file
     """
+
     def __init__(self, api_key, grammar_prompt_path, friendliness_prompt_path, humor_prompt_path):
         """
         Initializes a new instance of the OpenAIHandler class.
-        
+
         Parameters:
-            api_key (str): API key for OpenAI API 
+            api_key (str): API key for OpenAI API
             grammar_prompt_path (str): path to grammar prompt text file
             friendliness_prompt_path (str): path to friendliness prompt text file
             humor_prompt_path (str): path to humor prompt text file
@@ -36,10 +37,10 @@ class OpenAIHandler:
     def get_response(self, content):
         """
         Sends a prompt to the OpenAI API and returns the generated response.
-        
+
         Parameters:
             content (str): text input prompt for OpenAI API
-            
+
         Returns:
             str: generated response from OpenAI API
         """
@@ -54,7 +55,7 @@ class OpenAIHandler:
     def generate_default_scores(self):
         """
         Generates default scores for each category.
-        
+
         Returns:
             dict: default scores for each category
         """
@@ -63,10 +64,10 @@ class OpenAIHandler:
     def get_message_score(self, content):
         """
         Processes the text and generates various scores on different categories.
-        
+
         Parameters:
             content (str): text to generate score for
-            
+
         Returns:
             dict: scores for each category
         """
@@ -79,10 +80,10 @@ class OpenAIHandler:
     def get_grammar_score(self, content):
         """
         Calculates the grammar score for a given message.
-        
+
         Parameters:
             content (str): text to generate score for
-            
+
         Returns:
             int: grammar score [-1, 0, 1]
         """
@@ -124,10 +125,10 @@ class OpenAIHandler:
     def get_friendliness_score(self, content):
         """
         Calculates the friendliness score for a given message.
-        
+
         Parameters:
             content (str): text to generate score for
-            
+
         Returns:
             int: friendliness score [-1, 0, 1]
         """
@@ -169,13 +170,13 @@ class OpenAIHandler:
     def get_humor_score(self, content):
         """
         Calculates the humor score for a given message.
-        
+
         Parameters:
             content (str): text to generate score for
-            
+
         Returns:
             int: humor score [-1, 0, 1]
-            
+
         Raises:
             AuthenticationError: raised if no API key provided
             ValueError: raised if API does not produce pure numerical output

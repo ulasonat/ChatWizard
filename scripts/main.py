@@ -3,8 +3,8 @@ This script is responsible for running the ChatWizard Discord bot. It takes in t
     1. OpenAI API key
     2. Discord API key
 
-This script runs the Discord client by initializing a new instance of the DiscordBot class and passing it the appropriate
-arguments. It also initializes a new instance of the OpenAIHandler class and passes the necessary API key and prompts for
+This script runs the Discord client by initializing an instance of the DiscordBot class and passing it the appropriate
+arguments. It initializes a new instance of the OpenAIHandler class and passes the necessary API key and prompts for
 processing the text and generating various scores on different categories.
 """
 
@@ -12,6 +12,7 @@ import sys
 import discord
 from openai_handler import OpenAIHandler
 from discord_bot import DiscordBot
+
 
 def run(open_ai_api_key, discord_api_key):
     """

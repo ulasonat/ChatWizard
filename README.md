@@ -7,7 +7,7 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 [![Build Status](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/ulasonat/ChatWizard/branch/main/graph/badge.svg?token=G2AE2OWNO3)](https://codecov.io/gh/ulasonat/ChatWizard)
 [![](https://img.shields.io/pypi/v/chatwizard?color=blue)](https://pypi.org/project/chatwizard/)
-
+[![Documentation](https://img.shields.io/badge/documentation-website-green)](https://ulasonat.github.io/ChatWizard/)
 
 
 ## Overview
@@ -20,6 +20,10 @@ ChatWizard is a Discord bot that encourages positivity within a server by analyz
 - Encourages and rewards positive contributions to the server.
 - Provides a score breakdown so members can see how they're performing in each category.
 - Logs all messages sent, making it easy to review member behavior.
+
+## Demo
+
+<img src="demo.png" alt="Demo Image" style="width:50%;height:50%;">
 
 ## Dependencies 
 1. Python 3.6 or higher
@@ -68,6 +72,26 @@ Alternatively, you can import the library and call the main.run function by pass
 ```python
 run(discord_api_key, openai_api_key)
 ```
+
+Moreover, you can have instances of either OpenAIHandler or DiscordBot classes, and use the functions available.
+If you want to use our library to get a humor score for the sentence, you can do the following:
+
+```python
+from openai_handler import OpenAIHandler
+
+openai_handler = OpenAIHandler(
+    api_key=open_ai_api_key,
+    grammar_prompt_path=grammar_prompt_path,
+    friendliness_prompt_path=friendliness_prompt_path,
+    humor_prompt_path=humor_prompt_path,
+)
+
+worst_joke_ever = 'Why did the tomato turn red? Because it saw the salad dressing!'
+
+humor_score = openai_handler.get_humor_score(worst_joke_ever)
+```
+
+More examples are included in our project's website.
 
 ## Bot Commands
 

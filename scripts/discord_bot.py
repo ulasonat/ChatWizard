@@ -1,5 +1,6 @@
 """
-This script contains the implementation of the DiscordBot class, which is responsible for interacting with the Discord API and OpenAI's GPT-3.5-turbo API to analyze and score members' behavior based on different categories.
+This script contains the implementation of the DiscordBot class, which is responsible for interacting with the
+Discord API and OpenAI's GPT-3.5-turbo API to analyze and score members' behavior based on different categories.
 """
 
 import discord
@@ -12,6 +13,7 @@ class DiscordBot(discord.Client):
     A class that represents a Discord bot that encourages positivity
     within a server by analyzing and scoring each member's behavior.
     """
+
     def __init__(self, intents, openai_handler, log_file_path, user_scores_path):
         """
         Initializes a new instance of the DiscordBot class.
@@ -35,7 +37,7 @@ class DiscordBot(discord.Client):
         A callback method that is called when bot connects to Discord.
         It prints a message to the console indicating that the bot has connected to Discord.
         """
-        
+
         print(f"{self.user} has connected to Discord!")
 
     async def on_message(self, message):
@@ -174,7 +176,7 @@ class DiscordBot(discord.Client):
     def load_user_scores(self):
         """
         Loads the user scores from the JSON file.
-        
+
         Returns:
             dict: A dictionary that maps user IDs to their scores.
         """
@@ -186,9 +188,9 @@ class DiscordBot(discord.Client):
 
     def save_user_scores(self):
         """
-            Saves the user scores to the JSON file by writing the self.user_scores dictionary to the JSON file.
+        Saves the user scores to the JSON file by writing the self.user_scores dictionary to the JSON file.
         """
-        
+
         with open(self.user_scores_path, "w") as file:
             json.dump(self.user_scores, file)
 
@@ -196,7 +198,7 @@ class DiscordBot(discord.Client):
         """
         Appends the nickname and message content to the log file.
         If the log file does not exist, creates a new log file.
-        
+
         Parameters:
             nickname (str): The nickname of the user who sent the message.
             content (str): The content of the message.
@@ -212,18 +214,18 @@ class DiscordBot(discord.Client):
     def get_corresponding_word(self, label, score):
         """
         Returns the corresponding word for a given score and label.
-        
+
         Parameters:
             label (str): The label/category for the score.
             score (int): The score in the range [-1,0,1].
-        
+
         Returns:
             str: The corresponding word for the score and label.
-        
+
         Raises:
             ValueError: If label or score are not recognized or invalid.
         """
-        
+
         if label not in self.categories:
             raise ValueError
         if score not in [-1, 0, 1]:
