@@ -73,6 +73,26 @@ Alternatively, you can import the library and call the main.run function by pass
 run(discord_api_key, openai_api_key)
 ```
 
+Moreover, you can have instances of either OpenAIHandler or DiscordBot classes, and use the functions available.
+If you want to use our library to get a humor score for the sentence, you can do the following:
+
+```python
+from openai_handler import OpenAIHandler
+
+openai_handler = OpenAIHandler(
+    api_key=open_ai_api_key,
+    grammar_prompt_path=grammar_prompt_path,
+    friendliness_prompt_path=friendliness_prompt_path,
+    humor_prompt_path=humor_prompt_path,
+)
+
+worst_joke_ever = 'Why did the tomato turn red? Because it saw the salad dressing!'
+
+humor_score = openai_handler.get_humor_score(worst_joke_ever)
+```
+
+More examples are included in our project's website.
+
 ## Bot Commands
 
 - To get help: `!help`
