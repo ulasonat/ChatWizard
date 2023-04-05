@@ -13,6 +13,7 @@ import discord
 from openai_handler import OpenAIHandler
 from discord_bot import DiscordBot
 
+
 def run(open_ai_api_key, discord_api_key):
     """
     Initializes instances of the OpenAIHandler and DiscordBot classes, and runs the Discord bot.
