@@ -13,16 +13,6 @@ Features
 - Provides a score breakdown so members can see how they're performing in each category.
 - Logs all messages sent, making it easy to review member behavior.
 
-.. _demo:
-
-Demo
-====
-
-.. image:: demo.png
-   :alt: Demo Image
-   :width: 50%
-   :height: 50%
-
 .. _dependencies:
 
 Dependencies
@@ -70,9 +60,20 @@ Installation
 
 4. Invite the bot to your server through Discord Developer Portal.
 
-.. _usage:
+.. _bot_commands:
 
-Usage
+Bot Commands
+============
+
+- To get help: `!help`
+- To view your scores: `!me`
+- To reset your scores: `!reset`
+
+After sending a message, ChatWizard will reply with an embed showing the score breakdown for that message.
+
+.. _usage&examples:
+
+Usage & Examples
 =====
 
 To run the application, execute the following command in your terminal/cmd prompt::
@@ -104,16 +105,32 @@ If you want to use our library to get a humor score for the sentence, you can do
    worst_joke_ever = 'Why did the tomato turn red? Because it saw the salad dressing!'
 
    humor_score = openai_handler.get_humor_score(worst_joke_ever)
+   
+Using the same structure, you can get scores for different categories too:
+.. code-block:: python
 
-More examples are included in our project's website.
+   friendliness_score = openai_handler.get_friendliness_score(friendliness_text)
+   grammar_score = openai_handler.get_grammar_score(grammar_text)
 
-.. _bot_commands:
+If anytime you would like to update a certain user's score by writing code, it's possible to do that too:
+.. code-block:: python
 
-Bot Commands
-============
+   from discord_bot import DiscordBot
+   intents = discord.Intents.default()
+   intents.members = True
+   intents.message_content = True
 
-- To get help: `!help`
-- To view your scores: `!me`
-- To reset your scores: `!reset`
+   bot = DiscordBot(
+      intents=intents,
+      openai_handler=openai_handler,
+      log_file_path=log_file_path,
+      user_scores_path=user_scores_path,
+   )
 
-After sending a message, ChatWizard will reply with an embed showing the score breakdown for that message.
+   scores_to_update = {"grammar": 10, "friendliness": 10, "humor": 10}
+   bot.update_scores('user_id_example', scores_to_update)
+
+Using the bot object, you can get the corresponding word to which the score refers to for the given context:
+
+.. code-block:: python
+   bot.get_corresponding_word('humor_score', humor_score)
