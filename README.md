@@ -7,7 +7,7 @@ Discord bot to encourage positiveness within a server by analyzing and scoring e
 [![Build Status](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ulasonat/ChatWizard/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/ulasonat/ChatWizard/branch/main/graph/badge.svg?token=G2AE2OWNO3)](https://codecov.io/gh/ulasonat/ChatWizard)
 [![](https://img.shields.io/pypi/v/chatwizard?color=blue)](https://pypi.org/project/chatwizard/)
-[![Documentation Status](https://readthedocs.org/projects/chatwizard/badge/?version=latest)](https://chatwizard.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/chatwizard/badge/?version=doc_website)](https://chatwizard.readthedocs.io/en/doc_website/?badge=doc_website)
 
 
 ## Overview
