@@ -18,6 +18,8 @@ recursive-include scripts *.json
 recursive-include scripts *.py
 recursive-include scripts *.txt
 recursive-include scripts *.xml
+recursive-include docs *.png
+recursive-include docs *.rst
 
 prune .github
 exclude .gitignore
