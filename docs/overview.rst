@@ -137,3 +137,10 @@ Using the bot object, you can get the corresponding word to which the score refe
 .. code-block:: python
 
    bot.get_corresponding_word('humor_score', humor_score)
+
+.. _documentation:
+
+.. automodule:: ChatWizard
+   :members:
+   :undoc-members:
+   :show-inheritance:
