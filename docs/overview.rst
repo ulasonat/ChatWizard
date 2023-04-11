@@ -44,14 +44,14 @@ Installation
 
 3. Set up the following environment variables, replacing `your_discord_api_key` and `your_openai_api_key` with your actual API keys:
 
-For bash::
+For bash,
 
 .. code-block:: bash
 
-   export DISCORD_API_KEY="your_discord_api_key"
-   export OPENAI_API_KEY="your_openai_api_key"
+      export DISCORD_API_KEY="your_discord_api_key"
+      export OPENAI_API_KEY="your_openai_api_key"
 
-For Windows cmd::
+For Windows cmd,
 
 .. code-block:: bash
 
@@ -76,11 +76,11 @@ After sending a message, ChatWizard will reply with an embed showing the score b
 Usage & Examples
 =====
 
-To run the application, execute the following command in your terminal/cmd prompt::
+To run the application, execute the following command in your terminal/cmd prompt,
 
 .. code-block:: bash
 
-   python main.py <openai_api_key> <discord_api_key>
+      python main.py <openai_api_key> <discord_api_key>
 
 Alternatively, you can import the library and call the main.run function by passing the Discord API key, OpenAI API key as arguments. Then, run the bot using the `run` method.
 
