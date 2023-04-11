@@ -7,7 +7,6 @@ ChatWizard: Discord bot to encourage positiveness!
 
    overview
    documentation
-   examples
 
 
 Indices and tables
