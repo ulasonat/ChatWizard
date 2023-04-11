@@ -44,19 +44,19 @@ Installation
 
 3. Set up the following environment variables, replacing `your_discord_api_key` and `your_openai_api_key` with your actual API keys:
 
-   For bash::
+For bash::
 
 .. code-block:: bash
 
-         export DISCORD_API_KEY="your_discord_api_key"
-         export OPENAI_API_KEY="your_openai_api_key"
+   export DISCORD_API_KEY="your_discord_api_key"
+   export OPENAI_API_KEY="your_openai_api_key"
 
-   For Windows cmd::
+For Windows cmd::
 
-      .. code-block:: cmd
+.. code-block:: bash
 
-         set DISCORD_API_KEY="your_discord_api_key"
-         set OPENAI_API_KEY="your_openai_api_key"
+   set DISCORD_API_KEY="your_discord_api_key"
+   set OPENAI_API_KEY="your_openai_api_key"
 
 4. Invite the bot to your server through Discord Developer Portal.
 
@@ -80,7 +80,7 @@ To run the application, execute the following command in your terminal/cmd promp
 
 .. code-block:: bash
 
-      python main.py <openai_api_key> <discord_api_key>
+   python main.py <openai_api_key> <discord_api_key>
 
 Alternatively, you can import the library and call the main.run function by passing the Discord API key, OpenAI API key as arguments. Then, run the bot using the `run` method.
 
@@ -135,5 +135,5 @@ If anytime you would like to update a certain user's score by writing code, it's
 Using the bot object, you can get the corresponding word to which the score refers to for the given context:
 
 .. code-block:: python
-   
+
    bot.get_corresponding_word('humor_score', humor_score)
