@@ -31,13 +31,13 @@ Installation
 
 1. Clone this repository::
 
-   .. code-block:: bash
+.. code-block:: bash
 
       git clone https://github.com/ulasonat/ChatWizard.git
 
 2. Install the required third-party packages::
 
-   .. code-block:: bash
+.. code-block:: bash
 
       pip install discord
       pip install openai
@@ -46,7 +46,7 @@ Installation
 
    For bash::
 
-      .. code-block:: bash
+.. code-block:: bash
 
          export DISCORD_API_KEY="your_discord_api_key"
          export OPENAI_API_KEY="your_openai_api_key"
@@ -78,7 +78,7 @@ Usage & Examples
 
 To run the application, execute the following command in your terminal/cmd prompt::
 
-   .. code-block:: bash
+.. code-block:: bash
 
       python main.py <openai_api_key> <discord_api_key>
 
@@ -107,12 +107,14 @@ If you want to use our library to get a humor score for the sentence, you can do
    humor_score = openai_handler.get_humor_score(worst_joke_ever)
    
 Using the same structure, you can get scores for different categories too:
+
 .. code-block:: python
 
    friendliness_score = openai_handler.get_friendliness_score(friendliness_text)
    grammar_score = openai_handler.get_grammar_score(grammar_text)
 
 If anytime you would like to update a certain user's score by writing code, it's possible to do that too:
+
 .. code-block:: python
 
    from discord_bot import DiscordBot
@@ -133,4 +135,5 @@ If anytime you would like to update a certain user's score by writing code, it's
 Using the bot object, you can get the corresponding word to which the score refers to for the given context:
 
 .. code-block:: python
+   
    bot.get_corresponding_word('humor_score', humor_score)
