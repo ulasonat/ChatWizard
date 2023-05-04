@@ -251,4 +251,4 @@ class DiscordBot(discord.Client):
         if label not in valid_labels:
             raise ValueError("Invalid label.")
 
-        return score_to_word(words[label], score)
+        return self.score_to_word(words[label], score)
