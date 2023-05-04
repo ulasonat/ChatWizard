@@ -211,7 +211,7 @@ class DiscordBot(discord.Client):
         with open(self.log_file_path, "a") as log_file:
             log_file.write(f"{nickname}: {content}\n")
 
-    def score_to_word(score_map, score):
+    def score_to_word(self, score_map, score):
         """
         Returns the corresponding word for a given score from the provided score map.
 
