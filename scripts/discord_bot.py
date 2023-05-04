@@ -211,6 +211,22 @@ class DiscordBot(discord.Client):
         with open(self.log_file_path, "a") as log_file:
             log_file.write(f"{nickname}: {content}\n")
 
+    def score_to_word(self, score_map, score):
+        """
+        Returns the corresponding word for a given score from the provided score map.
+
+        Parameters:
+            score_map (dict): The dictionary containing the score-word mapping.
+            score (int): The score in the range [-1, 0, 1].
+
+        Returns:
+            str: The corresponding word for the score in the score map.
+        """
+        if score in score_map:
+            return score_map[score]
+        else:
+            raise ValueError("Invalid score.")
+
     def get_corresponding_word(self, label, score):
         """
         Returns the corresponding word for a given score and label.
@@ -225,30 +241,14 @@ class DiscordBot(discord.Client):
         Raises:
             ValueError: If label or score are not recognized or invalid.
         """
+        valid_labels = ['grammar', 'friendliness', 'humor']
+        words = {
+            'grammar': {1: 'Appropriate', 0: 'Mediocre', -1: 'Bad'},
+            'friendliness': {1: 'Friendly', 0: 'Natural', -1: 'Not friendly'},
+            'humor': {1: 'Funny', 0: 'Mediocre', -1: 'Not funny'},
+        }
 
-        if label not in self.categories:
-            raise ValueError
-        if score not in [-1, 0, 1]:
-            raise ValueError
+        if label not in valid_labels:
+            raise ValueError("Invalid label.")
 
-        if label == 'grammar':
-            if score == 1:
-                return 'Appropriate'
-            if score == 0:
-                return 'Mediocre'
-            if score == -1:
-                return 'Bad'
-        elif label == 'friendliness':
-            if score == 1:
-                return 'Friendly'
-            if score == 0:
-                return 'Natural'
-            if score == -1:
-                return 'Not friendly'
-        elif label == 'humor':
-            if score == 1:
-                return 'Funny'
-            if score == 0:
-                return 'Mediocre'
-            if score == -1:
-                return 'Not funny'
+        return self.score_to_word(words[label], score)
