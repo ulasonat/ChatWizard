@@ -191,6 +191,7 @@ def test_get_corresponding_word(bot):
         bot.get_corresponding_word('invalid_label', 1)
         bot.get_corresponding_word('grammar', 2)
 
+
 def test_score_to_word(bot):
     score_map = {1: "Appropriate", 0: "Mediocre", -1: "Bad"}
 
