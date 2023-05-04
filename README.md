@@ -16,7 +16,7 @@ ChatWizard is a Discord bot that encourages positivity within a server by analyz
 
 ## Features
 
-- Analyzes and scores server members based on grammar, friendliness, and humor.
+- Analyzes and scores server members based on grammar, friendliness, and humor values of their messages.
 - Encourages and rewards positive contributions to the server.
 - Provides a score breakdown so members can see how they're performing in each category.
 - Logs all messages sent, making it easy to review member behavior.
