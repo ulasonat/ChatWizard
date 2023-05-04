@@ -245,11 +245,10 @@ class DiscordBot(discord.Client):
         words = {
             'grammar': {1: 'Appropriate', 0: 'Mediocre', -1: 'Bad'},
             'friendliness': {1: 'Friendly', 0: 'Natural', -1: 'Not friendly'},
-            'humor': {1: 'Funny', 0: 'Mediocre', -1: 'Not funny'}
+            'humor': {1: 'Funny', 0: 'Mediocre', -1: 'Not funny'},
         }
 
         if label not in valid_labels:
             raise ValueError("Invalid label.")
 
         return score_to_word(words[label], score)
-        
