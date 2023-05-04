@@ -191,6 +191,20 @@ def test_get_corresponding_word(bot):
         bot.get_corresponding_word('invalid_label', 1)
         bot.get_corresponding_word('grammar', 2)
 
+def test_score_to_word(bot):
+    score_map = {1: "Appropriate", 0: "Mediocre", -1: "Bad"}
+
+    result_1 = bot.score_to_word(score_map, 1)
+    result_0 = bot.score_to_word(score_map, 0)
+    result_minus1 = bot.score_to_word(score_map, -1)
+
+    assert result_1 == "Appropriate"
+    assert result_0 == "Mediocre"
+    assert result_minus1 == "Bad"
+
+    with pytest.raises(ValueError):
+        bot.score_to_word(score_map, 3)
+
 
 def test_run_invalid():
     open_ai_api_key = '12345'
