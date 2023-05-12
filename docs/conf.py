@@ -2,7 +2,7 @@ import sphinx_rtd_theme
 import os, sys
 from recommonmark.transform import AutoStructify
 
-project = 'ChatWizard'
+project = 'scripts'
 copyright = '2023, Ulas Alakent'
 author = 'Ulas Alakent'
 release = '0.2.0'
