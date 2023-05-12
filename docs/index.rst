@@ -7,9 +7,3 @@ ChatWizard: Discord bot to encourage positiveness!
 
    overview
    documentation
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
