@@ -30,9 +30,9 @@ def bot():
 def handler():
     handler = OpenAIHandler(
         api_key="test_key",
-        grammar_prompt_path="test_path",
-        friendliness_prompt_path="test_path",
-        humor_prompt_path="test_path",
+        grammar_prompt_path="scripts/tests_tmp/test_prompt.txt",
+        friendliness_prompt_path="scripts/tests_tmp/test_prompt.txt",
+        humor_prompt_path="scripts/tests_tmp/test_prompt.txt",
     )
     return handler
 

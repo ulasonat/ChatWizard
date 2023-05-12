@@ -21,10 +21,6 @@ ChatWizard is a Discord bot that encourages positivity within a server by analyz
 - Provides a score breakdown so members can see how they're performing in each category.
 - Logs all messages sent, making it easy to review member behavior.
 
-## Demo
-
-<img src="demo.png" alt="Demo Image" style="width:50%;height:50%;">
-
 ## Dependencies 
 1. Python 3.6 or higher
 2. `discord.py` module (v1.7.3 or higher)
